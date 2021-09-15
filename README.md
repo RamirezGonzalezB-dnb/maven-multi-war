@@ -1,8 +1,21 @@
 # Overview
-This is a multi-module Maven project with dependencies between two WAR modules.
-Run the root application as `mvn -am -pl clean integration-test` to start a local
-embedded Tomcat instance on port `8080`.  Then, access the application using a
-web browser at [http://localhost:8080](http://localhost:8080).
+
+This is a fork of https://github.com/manish-in-java/maven-multi-war to show a bug in IntelliJ IDEA where multi-module
+Tomcat run configurations are not deployed correctly.
+
+The project works as follows: Module Y has a Spring controller that is wired to a Spring service in Module X. When
+the `/` endpoint is hit, the server should return "Hello".
+
+However, for some reason relating to WAR deployment, this example doesn't work.
+
+## To use
+
+1. Using the included run configuration, create a new Tomcat application server configuration with the home directory set
+   to a normal Tomcat/Catalina installation, and the base directory set to the `tomcat` folder of this project
+   (which contains a `server.xml`).
+2. Build and run using the run configuration (not using the Maven `integration-test` target).
+3. Attempt to connect to http://localhost:9077/
+4. Notice how instead of getting "Hello", you just get a 404.
 
 # License
 This sample application and its associated source code in its entirety is being made

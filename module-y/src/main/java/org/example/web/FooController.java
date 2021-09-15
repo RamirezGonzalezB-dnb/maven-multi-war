@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FooController
 {
+  private final FooService service;
+
   @Autowired
-  private FooService service;
+  public FooController(FooService service) {
+    this.service = service;
+    System.out.println("FooController loaded");
+  }
 
   @RequestMapping("/")
   @ResponseBody
