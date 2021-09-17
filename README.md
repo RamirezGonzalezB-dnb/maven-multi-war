@@ -6,7 +6,26 @@ Tomcat run configurations are not deployed correctly.
 The project works as follows: Module Y has a Spring controller that is wired to a Spring service in Module X. When
 the `/` endpoint is hit, the server should return "Hello".
 
-However, for some reason relating to WAR deployment, this example doesn't work.
+However, for some reason, this example doesn't work.
+
+This bug is being tracked on https://youtrack.jetbrains.com/issue/IDEA-278286.
+
+The current workaround is to apply this fix:
+
+```patch
+diff --git a/tomcat/conf/server.xml b/tomcat/conf/server.xml
+--- a/tomcat/conf/server.xml	(revision 1d5278be42459323292c384b00c5cad1840fb90f)
++++ b/tomcat/conf/server.xml	(date 1631895396933)
+@@ -18,7 +18,7 @@
+                    useAsyncIO="true" connectionTimeout="60000"
+                    compression="on" compressibleMimeType="text/plain,application/json" >
+         </Connector>
+-        <Engine name="ModuleXEngine" defaultHost="localhost">
++        <Engine name="Catalina" defaultHost="localhost">
+             <Host name="localhost" appBase="webapps/module-x" unpackWARs="true" autoDeploy="true">
+                 <Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false" showServerInfo="false"/>
+             </Host>
+```
 
 ## To use
 

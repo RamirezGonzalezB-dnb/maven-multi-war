@@ -18,7 +18,7 @@
                    useAsyncIO="true" connectionTimeout="60000"
                    compression="on" compressibleMimeType="text/plain,application/json" >
         </Connector>
-        <Engine name="ModuleXEngine" defaultHost="localhost">
+        <Engine name="Catalina" defaultHost="localhost">
             <Host name="localhost" appBase="webapps/module-x" unpackWARs="true" autoDeploy="true">
                 <Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false" showServerInfo="false"/>
             </Host>
